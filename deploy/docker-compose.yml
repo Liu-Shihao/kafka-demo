@@ -7,6 +7,8 @@ services:
       - "2181:2181"
     volumes:
       - ./zookeeper/data:/data
+      - ./zookeeper/data/datalog:/data/datalog
+      - ./zookeeper/datalog:/datalog
   kafka:
     image: cppla/kafka-docker:arm
     ports:
