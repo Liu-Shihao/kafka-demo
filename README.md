@@ -1,6 +1,14 @@
 
-# 使用docker-compose部署zookeeper和kafka
-## docker-compose.yml文件
+# Kafka 概念介绍
+
+
+
+# 安装Kafka
+## 直接在官网下载压缩包解压安装
+
+
+## 使用docker-compose部署zookeeper和kafka
+ docker-compose.yml文件
 ```yml
 version: '2'
 
@@ -60,17 +68,23 @@ cd /opt/kafka/config
 cd /opt/kafka/bin
 
 #查看Topic列表
-kafka-topics.sh --list --zookeeper 192.168.153.131:2181 
+./kafka-topics.sh --bootstrap-server 192.168.153.131:9092 --list
 #查看Topic详情
-kafka-topics.sh --describe --topic test --zookeeper 192.168.153.131:2181
+./kafka-topics.sh --bootstrap-server 192.168.153.131:9092  --describe --topic test 
 
 #创建Topic
-kafka-topics.sh --create --zookeeper 192.168.153.131:2181 --topic test --partitions 2 --replication-factor 1
+./kafka-topics.sh --create --bootstrap-server 192.168.153.131:9092 --topic test --partitions 2 --replication-factor 1
+
+./kafka-topics.sh --create --bootstrap-server 192.168.153.131:9092 --topic originTopic --partitions 3 --replication-factor 1
+./kafka-topics.sh --create --bootstrap-server 192.168.153.131:9092 --topic copyTopic --partitions 3 --replication-factor 1
+./kafka-topics.sh --create --bootstrap-server 192.168.153.131:9092 --topic suma --partitions 3 --replication-factor 1
+./kafka-topics.sh --create --bootstrap-server 192.168.153.131:9092 --topic sumb --partitions 3 --replication-factor 1
+
 #删除Topic
-kafka-topics.sh --delete --zookeeper 192.168.153.131:2181 --topic test 
+kafka-topics.sh --delete --bootstrap-server 192.168.153.131:9092 --topic test 
 
 # 生产消息
-kafka-console-producer.sh --broker-list 192.168.153.131:9092 --topic test
+./kafka-console-producer.sh --broker-list 192.168.153.131:9092 --topic originTopic
 # 监听消息
-kafka-console-consumer.sh --bootstrap-server 192.168.153.131:9092 --topic test2 --from-beginning
+./kafka-console-consumer.sh --bootstrap-server 192.168.153.131:9092 --topic copyTopic --from-beginning
 ```

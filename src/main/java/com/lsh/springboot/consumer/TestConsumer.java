@@ -1,4 +1,4 @@
-package com.lsh.kafka;
+package com.lsh.springboot.consumer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
